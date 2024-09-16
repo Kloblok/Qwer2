@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Qwen2-VL-7B Flask App</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Тестирование модели Qwen2-VL-7B</h1>
+        <form id="form" action="/predict" method="post">
+            <input type="text" id="text-input" name="text" placeholder="Введите текст" required>
+            <button type="submit">Отправить</button>
+        </form>
+        <div id="response"></div>
+    </div>
+
+    <script>
+        document.getElementById('form').onsubmit = async (e) => {
+            e.preventDefault();
+            
+            // Сохранение значений формы
+            const inputField = document.getElementById('text-input');
+            const formData = new FormData(e.target);
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData,
+            });
+            const data = await response.json();
+            
+            // Отображение ответа
+            document.getElementById('response').innerText = data.msg;
+
+            // Сохранение значения в поле ввода
+            inputField.value = formData.get('text');
+        };
+    </script>
+</body>
+</html>
