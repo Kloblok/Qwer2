@@ -1,0 +1,14 @@
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+#form {
+    margin-bottom: 20px;
+}
+
+#response {
+    font-size: 18px;
+    margin-top: 20px;
+}
